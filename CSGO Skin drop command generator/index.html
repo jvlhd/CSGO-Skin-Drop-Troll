@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+      <link rel="stylesheet" href="styles.css">
+
+      <meta charset="utf-8">
+
+      <style>
+body {
+  background-image: url('bg.jpg');
+}
+</style>
+
+    </head>
+
+    <body>
+      <div class="center">
+          <h2 style="text-align:center">Command preferences</h2>
+
+          <p style="text-align:center">
+              <label for="name">Your nickname</label>
+              <input class="form-control" id="name" type="text" value="Player">
+
+          </p>
+
+          <p style="text-align:center">
+              <label for="item">Item</label>
+              <input class="form-control" id="item" type="text" value="Karambit">
+
+          </p>
+
+          <p style="text-align:center">
+              <label for="paintkit">Skin</label>
+              <input class="form-control" id="paintkit" type="text" value="Lore">
+
+          </p>
+
+          <p style="text-align:center">
+              <label for="rarity">Rarity</label>
+
+              <select id="rarity">
+
+                  <option value="0x0F" selected>Covert (red)</option>
+                  <option value="0x0E">Classified (pink)</option>
+                  <option value="0x0C">Mil-Spec (blue)</option>
+
+              </select>
+
+          </p>
+
+          <p style="text-align:center">
+              <input id="starred" type="checkbox" value="Player" checked>
+              <label for="starred">Knife or gloves?</label>
+
+          </p>
+
+          <p style="text-align:center">
+              <input id="stattrak" type="checkbox" value="Player" checked>
+              <label for="stattrak">StatTrack&trade;</label>
+
+          </p>
+
+        <div style="text-align:center">
+          <input id="dummyinput" style="position:absolute;left:-20000%" type="text">
+          <button type="button" class="btn btn-dark" onclick="copy()">Copy command</button>
+        </div>
+      </div>
+
+        <script>
+
+            var copy = () =>
+            {
+                let name = document.getElementById("name").value;
+                let item = document.getElementById("item").value;
+                let starred = document.getElementById("starred").checked ? "★" : "";
+                let paintkit = document.getElementById("paintkit").value;
+                let stattrak = document.getElementById("stattrak").checked ? " StatTrak™" : "";
+                let rarity = String.fromCharCode(eval(document.getElementById("rarity").value));
+
+                let input = document.getElementById("dummyinput");
+                input.value = `playerradio Radio.WePlanted "\u2028\x03\x03${name} \x01has opened a container and found: ${rarity}${starred}${stattrak} ${item} | ${paintkit}"`;
+                input.select();
+                input.setSelectionRange(0, input.value.length)
+                document.execCommand("copy");
+            };
+
+        </script>
+
+    </body>
+
+</html>
